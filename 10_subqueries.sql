@@ -4,7 +4,7 @@
 SELECT *
 FROM parks_and_recreation.employee_demographics
 WHERE employee_id IN (
-	SELECT employee_id
+    SELECT employee_id
     FROM parks_and_recreation.employee_salary
     WHERE dept_id = 1
 );
@@ -12,9 +12,9 @@ WHERE employee_id IN (
 -- Subquery salary for all employees and calculate the average as a
 -- new column in employee_salary.
 SELECT *
-	, (SELECT AVG(salary)
+    , (SELECT AVG(salary)
         FROM parks_and_recreation.employee_salary
-	) AS avg_salary
+    ) AS avg_salary
 FROM parks_and_recreation.employee_salary;
 
 -- Subquery aggregate age information and operate on the aggregated
@@ -22,10 +22,10 @@ FROM parks_and_recreation.employee_salary;
 -- males and females.
 SELECT AVG(max_age)
 FROM (SELECT gender
-		, AVG(age) AS avg_age
-		, MIN(age) AS min_age
-		, MAX(age) AS max_age
-		, COUNT(age) AS num_age
-	FROM parks_and_recreation.employee_demographics
-	GROUP BY gender
+        , AVG(age) AS avg_age
+        , MIN(age) AS min_age
+        , MAX(age) AS max_age
+        , COUNT(age) AS num_age
+    FROM parks_and_recreation.employee_demographics
+    GROUP BY gender
 ) AS agg_table;
