@@ -15,9 +15,9 @@ FROM world_layoffs.layoffs;
 -- 1. Remove duplicates
 -- ------------------------------------------------------------
 WITH duplicates_cte AS (
-	SELECT *
-		, ROW_NUMBER() OVER(
-			PARTITION BY company
+    SELECT *
+        , ROW_NUMBER() OVER(
+            PARTITION BY company
             , location
             , industry
             , total_laid_off
@@ -26,8 +26,8 @@ WITH duplicates_cte AS (
             , stage
             , country
             , funds_raised_millions
-		) AS row_num
-	FROM world_layoffs.layoffs_staging
+        ) AS row_num
+    FROM world_layoffs.layoffs_staging
 )
 SELECT *
 FROM duplicates_cte
@@ -54,17 +54,17 @@ CREATE TABLE `layoffs_staging2` (
 -- Insert all the data into layoffs_staging2
 INSERT INTO world_layoffs.layoffs_staging2
 SELECT *
-	, ROW_NUMBER() OVER(
-		PARTITION BY company
-		, location
-		, industry
-		, total_laid_off
-		, percentage_laid_off
-		, `date`
-		, stage
-		, country
-		, funds_raised_millions
-	) AS row_num
+    , ROW_NUMBER() OVER(
+        PARTITION BY company
+        , location
+        , industry
+        , total_laid_off
+        , percentage_laid_off
+        , `date`
+        , stage
+        , country
+        , funds_raised_millions
+    ) AS row_num
 FROM world_layoffs.layoffs_staging;
 
 -- Delete the rows that are duplicates
@@ -124,23 +124,23 @@ WHERE industry IS NULL;
 -- Look for companies where there are multiple entries and at least
 -- one of them has a known industry
 SELECT t1.company
-	, t1.industry
+    , t1.industry
     , t2.industry
 FROM world_layoffs.layoffs_staging2 AS t1
 JOIN world_layoffs.layoffs_staging2 AS t2
-	ON t1.company = t2.company
-		AND t1.location = t2.location
+    ON t1.company = t2.company
+        AND t1.location = t2.location
 WHERE t1.industry IS NULL
-	AND t2.industry IS NOT NULL;
+    AND t2.industry IS NOT NULL;
 
 -- Use the known industries to update the missing industries
 UPDATE world_layoffs.layoffs_staging2 AS t1
 JOIN world_layoffs.layoffs_staging2 AS t2
-	ON t1.company = t2.company
-		AND t1.location = t2.location
+    ON t1.company = t2.company
+        AND t1.location = t2.location
 SET t1.industry = t2.industry
 WHERE t1.industry IS NULL
-	AND t2.industry IS NOT NULL;
+    AND t2.industry IS NOT NULL;
 
 -- Bally's Interactive only has one entry so its industry
 -- could not be populated
@@ -154,7 +154,7 @@ WHERE company LIKE 'Bally%';
 SELECT COUNT(*)
 FROM world_layoffs.layoffs_staging2
 WHERE total_laid_off IS NULL
-	AND percentage_laid_off IS NULL;
+    AND percentage_laid_off IS NULL;
     
 -- There are 361 rows that have no values for total_laid_off and
 -- percentage_laid_off. Since we need these values for the next
@@ -162,7 +162,7 @@ WHERE total_laid_off IS NULL
 DELETE
 FROM world_layoffs.layoffs_staging2
 WHERE total_laid_off IS NULL
-	AND percentage_laid_off IS NULL;
+    AND percentage_laid_off IS NULL;
 
 -- Drop the row_num column that was used for finding duplicates
 ALTER TABLE world_layoffs.layoffs_staging2
