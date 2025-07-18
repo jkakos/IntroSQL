@@ -1,8 +1,8 @@
 -- GROUP BY
 -- Group results by gender
 SELECT gender
-	, AVG(age)
-	, 2023 - AVG(YEAR(birth_date)) AS 'Manual AVG(age)'
+    , AVG(age)
+    , 2023 - AVG(YEAR(birth_date)) AS 'Manual AVG(age)'
     , MIN(age)
     , MAX(age)
     , COUNT(age) AS num_employees
@@ -14,6 +14,5 @@ GROUP BY gender;
 -- or descending
 SELECT *
 FROM parks_and_recreation.employee_demographics
-ORDER BY 
-	gender ASC
+ORDER BY gender ASC
     , age DESC;
