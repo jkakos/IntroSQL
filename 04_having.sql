@@ -12,14 +12,14 @@
 
 -- Select gender groups where the average age of the gender is greater than 40
 SELECT gender
-	, AVG(age)
+    , AVG(age)
 FROM parks_and_recreation.employee_demographics
 GROUP BY gender
 HAVING AVG(age) > 40;
 
 -- Select gender groups and show the average age for people older than 40
 SELECT gender
-	, AVG(age)
+    , AVG(age)
 FROM parks_and_recreation.employee_demographics
 WHERE age > 40
 GROUP BY gender;
@@ -27,7 +27,7 @@ GROUP BY gender;
 -- Select occupations and average salaries for manager positions, then group
 -- by occupation and select only those that make at least $50,000 per year.
 SELECT occupation
-	, AVG(salary)
+    , AVG(salary)
 FROM parks_and_recreation.employee_salary
 WHERE occupation LIKE '%manager%'
 GROUP BY occupation
