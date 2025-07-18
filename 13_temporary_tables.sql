@@ -1,6 +1,6 @@
 -- Create a temporary table and add values to it
 CREATE TEMPORARY TABLE temp (
-	first_name varchar(50)
+    first_name varchar(50)
     , last_name varchar(50)
     , favorite_movie varchar(100)
 );
