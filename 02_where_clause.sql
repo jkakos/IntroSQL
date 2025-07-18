@@ -15,16 +15,16 @@ WHERE birth_date > '1985-01-01'; -- YYYY-MM-DD date format;
 SELECT *
 FROM parks_and_recreation.employee_demographics
 WHERE birth_date > '1985-01-01'
-	AND NOT gender = 'Male';
+    AND NOT gender = 'Male';
 
 -- Grouping logical operators
 SELECT *
 FROM parks_and_recreation.employee_demographics
 WHERE (
-		first_name = 'Leslie'
+        first_name = 'Leslie'
         AND age = 44
-	)
-	OR age > 55;
+    )
+    OR age > 55;
 
 -- LIKE statement
 -- % and _    
@@ -39,4 +39,3 @@ WHERE first_name LIKE 'a___%'; -- find names with A, followed any three characte
 SELECT *
 FROM parks_and_recreation.employee_demographics
 WHERE birth_date LIKE '____-03-__'; -- find people born in March
-    
