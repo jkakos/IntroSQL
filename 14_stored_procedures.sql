@@ -16,12 +16,12 @@ DROP PROCEDURE IF EXISTS large_salaries2;
 DELIMITER $$
 CREATE PROCEDURE large_salaries2()
 BEGIN
-	SELECT *
-	FROM parks_and_recreation.employee_salary
-	WHERE salary >= 50000;
-	SELECT *
-	FROM parks_and_recreation.employee_salary
-	WHERE salary >= 10000;
+    SELECT *
+    FROM parks_and_recreation.employee_salary
+    WHERE salary >= 50000;
+    SELECT *
+    FROM parks_and_recreation.employee_salary
+    WHERE salary >= 10000;
 END $$
 DELIMITER ;
 
@@ -34,11 +34,11 @@ DROP PROCEDURE IF EXISTS large_salaries3;
 DELIMITER $$
 CREATE PROCEDURE large_salaries3(p_employee_id INT)
 BEGIN
-	SELECT employee_id
-		, first_name
-		, last_name
+    SELECT employee_id
+        , first_name
+        , last_name
         , salary
-	FROM parks_and_recreation.employee_salary
+    FROM parks_and_recreation.employee_salary
     WHERE employee_id = p_employee_id;
 END $$
 DELIMITER ;
